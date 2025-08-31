@@ -1,17 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import Header from './app/layout/Header';
+import { store } from './redux/store';
+import {Provider} from 'react-redux';
+import Counter from './app/components/Counter';
+import DestinationList from './app/components/DestinationList';
+import DestinationFact from './app/components/DestinationFact';
+import ResetApp from './app/components/ResetApp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <div className="text-white">
+    <Provider store={store}>
+      <Header />
+      <ResetApp/>
+      <Counter/>
+      <div className="p-4 border text-center">
+        <h4 className="text-success pb-4">Destination List</h4>
+        <DestinationList />
+        <DestinationFact />
+      </div>
+    </Provider>
+    </div>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
