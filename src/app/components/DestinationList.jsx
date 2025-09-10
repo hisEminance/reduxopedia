@@ -1,11 +1,12 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { destinationClicked } from "../../redux/store";
-
+import CountButton from '../../CountButton';
 
 function DestinationList() {
-    const destinationList = useSelector((state)=> state.destinationStore.destinations);
-    const dispatch = useDispatch();
+  const destinationList = useSelector((state)=> state.destinationStore.destinations);
+  const dispatch = useDispatch();
+
   return destinationList.map((destination, index) => {
     return (
       <div
@@ -17,12 +18,7 @@ function DestinationList() {
           {destination.name}
         </div>
         <div className="col-4 col-md-2">
-          <button
-            className="btn btn-success form-control m-1"
-            onClick={() => dispatch(destinationClicked(destination))}
-          >
-            Details
-          </button>
+          <CountButton label="Details" className="btn-success"  onClick={() => dispatch(destinationClicked(destination))}/>
         </div>
       </div>
     );

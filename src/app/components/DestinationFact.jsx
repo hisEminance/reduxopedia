@@ -6,7 +6,7 @@ function DestinationFact() {
   const selectedDestination = useSelector(
     (state) => state.destinationStore.destinationSelected
   );
-  if (selectedDestination == undefined) {
+  if (!selectedDestination) {
     return (
       <div className="text-center pt-4 text-warning">Select a Destination</div>
     );

@@ -1,12 +1,14 @@
 import React from 'react'
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement, incrementMultiplier, decrementMuptiplier } from "../../redux/slice/counterSlice";
+import { increment, decrement, incrementMultiplier, decrementMultiplier } from "../../redux/slice/counterSlice";
 import { useState } from 'react';
+import CountButton from '../../CountButton';
 
 function Counter() {
   const count = useSelector((state)=>state.counterStore.count)
   const dispatch = useDispatch();
   const [multiplier, setMultiplier] = useState(10);
+  
   return (
     <div
       className=" mt-2 pt-3 pl-2 text-center"
@@ -15,22 +17,11 @@ function Counter() {
       <div className="text-white pb-2 h4">Counter : {count}</div>
       <div className="row">
         <div className=" p-4 col-12 col-md-6">
-          <div className="border p-4">
-            <h4 className="text-success pb-2">Basic counter</h4>
-            <button
-              className="btn btn-primary"
-              onClick={() => dispatch(increment())}
-            >
-              Add
-            </button>{" "}
-            &nbsp;
-            <button
-              className="btn btn-danger"
-              onClick={() => dispatch(decrement())}
-            >
-              Remove
-            </button>
-          </div>
+         <div className="border p-4">
+           <h4 className="text-success pb-2">Basic counter</h4>
+           <CountButton label="Add" className="btn-primary" onClick={() => dispatch(increment())}/>
+           <CountButton label="Remove" className="btn-danger" onClick={() => dispatch(decrement())}/>
+         </div>
         </div>
       </div>
       <div className="row">
@@ -38,35 +29,23 @@ function Counter() {
           <div className="border p-4">
             <h4 className="text-success pb-2">Multiple counter</h4>
             <div className="row">
-            <div className="col-4 p-1">
-              <input 
-                type = "text" 
-                placeholder="multiplier" 
-                className="form-control" 
-                value={multiplier} 
-                onChange={(e) => setMultiplier(e.target.value)}
-              />
-            </div>
-            <div className="col-4 p-1"> 
-                <button
-                  className="btn btn-primary form-control"
-                  onClick={() => dispatch(incrementMultiplier(multiplier))} >
-                  Add
-                </button>
-            </div>
+             <div className="col-4 p-1">
+               <input
+                type="number"
+                className="form-control"
+                value={multiplier}
+                onChange={(e) => setMultiplier(Number(e.target.value))}
+               />
+              </div>
               <div className="col-4 p-1">
-                <button
-                  className="btn btn-danger form-control"
-                  onClick={() => dispatch(decrementMuptiplier(multiplier))}>
-                  Remove
-                </button>
+                <CountButton label="Add" className="btn-primary" onClick={() => dispatch(incrementMultiplier(multiplier))}/>
+              </div>
+              <div className="col-4 p-1">
+                <CountButton label="Remove" className="btn-danger" onClick={() => dispatch(decrementMultiplier(multiplier))}/>
               </div>
             </div>
-           {" "}
-            &nbsp;
           </div>
         </div>
-        
       </div>
     </div>
   );
